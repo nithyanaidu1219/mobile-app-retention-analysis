@@ -53,12 +53,30 @@ python scripts/analyse_retention.py
 - Compare retention across first-session duration bands.
 - Rank channels using downstream retention, not acquisition volume alone.
 
-## Example insights to evaluate
+## Results from the synthetic dataset
 
-- Channels with the most users may not produce the strongest D7 retention.
-- Very short first sessions can indicate weak onboarding or mismatched acquisition targeting.
-- A clear retention uplift after a particular engagement threshold can guide onboarding design.
-- Campaign decisions should combine acquisition cost with activation and retained-user quality.
+The reproducible generator creates 10,000 fictional mobile-app users. Running the analysis produced the following results:
+
+| Channel | Acquired users | Registration | Activation | D1 retention | D7 retention | D30 retention |
+|---|---:|---:|---:|---:|---:|---:|
+| Referral | 1,485 | 68.2% | 47.1% | 39.4% | 24.4% | 12.7% |
+| Organic | 3,513 | 65.3% | 45.5% | 36.2% | 20.8% | 11.9% |
+| Search | 2,033 | 59.1% | 41.8% | 31.5% | 19.0% | 9.5% |
+| Paid Social | 2,969 | 55.0% | 39.5% | 25.1% | 15.4% | 8.3% |
+
+![D1 retention by first-session duration](outputs/d1_retention_by_session.png)
+
+## Key findings
+
+1. **Referral generated the highest-quality users.** It led registration, activation, and every measured retention window, despite contributing the lowest acquisition volume.
+2. **Paid Social produced scale but weaker downstream quality.** It represented almost 30% of acquired users but had the lowest D1, D7, and D30 retention.
+3. **Organic acquisition delivered a strong balance of scale and quality.** It generated the largest cohort while maintaining the second-highest retention results.
+4. **First-session engagement was positively associated with D1 retention.** This supports prioritising onboarding experiences that move new users toward meaningful early actions.
+5. **Install volume alone would produce an incomplete campaign decision.** Channel evaluation should include activation, retention, and cost per retained user.
+
+## Business interpretation
+
+The analysis indicates that acquisition and product onboarding should be evaluated together. Growth teams can improve efficiency by shifting budget toward higher-quality sources, while Product teams can test onboarding changes for users with short first sessions. The results are directional because the data is synthetic; in a production setting, recommendations would be validated with campaign cost, user-value, and experiment data.
 
 ## Recommended business actions
 
@@ -71,4 +89,3 @@ python scripts/analyse_retention.py
 ## Skills demonstrated
 
 `SQL` · `Python` · `Pandas` · `BigQuery` · `Cohort Analysis` · `Retention` · `Funnels` · `Data Validation` · `Product Analytics` · `Growth Analytics` · `Business Communication`
-
